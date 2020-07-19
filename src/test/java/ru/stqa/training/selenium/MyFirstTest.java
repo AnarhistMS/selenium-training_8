@@ -33,7 +33,7 @@ public class MyFirstTest {
         wait.until(titleIs("Online Store | My Store"));
         List<WebElement> products = driver.findElements(By.xpath("//li[contains(@class, 'product')]"));
         for(WebElement e : products) {
-            Assert.assertTrue(e.findElements(By.xpath("//li[contains(@class, 'sticker')]")).size() != 1);
+            Assert.assertFalse(e.findElements(By.xpath(".//li[contains(@class, 'sticker')]")).size() == 1);
         }
     }
 
