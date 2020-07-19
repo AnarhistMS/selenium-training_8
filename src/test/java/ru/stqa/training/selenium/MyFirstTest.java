@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
@@ -30,10 +31,11 @@ public class MyFirstTest {
     @Test
     public void myFirstTest() {
         driver.get("http://localhost/litecart/");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         wait.until(titleIs("Online Store | My Store"));
         List<WebElement> products = driver.findElements(By.xpath("//li[contains(@class, 'product')]"));
         for(WebElement e : products) {
-            Assert.assertFalse(e.findElements(By.xpath(".//li[contains(@class, 'sticker')]")).size() == 1);
+            Assert.assertEquals(1, e.findElements(By.xpath(".//div[contains(@class, 'sticker')]")).size());
         }
     }
 
